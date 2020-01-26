@@ -1,6 +1,9 @@
 package com.cdk.global.shopping.cart.model;
 
-
+/**
+ * @author Ajay Singh Pundir
+ * All the invoices related information
+ */
 public class Invoice {
 
     private Customer customer;

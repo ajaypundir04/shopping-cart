@@ -2,6 +2,11 @@ package com.cdk.global.shopping.cart.model;
 
 import java.util.Objects;
 
+/**
+ * @author Ajay Singh Pundir
+ * It will handle the customer information.
+ */
+//We can have simple String as customer type
 public class Customer {
 
     private String customerType;

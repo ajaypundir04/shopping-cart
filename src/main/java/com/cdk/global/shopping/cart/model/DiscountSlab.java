@@ -2,7 +2,11 @@ package com.cdk.global.shopping.cart.model;
 
 import java.util.Objects;
 
-public class DiscountSlab implements Comparable<DiscountSlab>{
+/**
+ * @author Ajay Singh Pundir
+ * It will hold the information of Discount Slabs.
+ */
+public class DiscountSlab implements Comparable<DiscountSlab> {
 
     private double low;
     private double high;
@@ -40,7 +44,7 @@ public class DiscountSlab implements Comparable<DiscountSlab>{
 
     @Override
     public int compareTo(DiscountSlab other) {
-        return Double.compare(this.low,other.getLow());
+        return Double.compare(this.low, other.getLow());
     }
 
     @Override

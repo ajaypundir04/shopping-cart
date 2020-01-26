@@ -41,6 +41,13 @@ public class InputFileReader {
         return stringList;
     }
 
+    /**
+     * Read the *.txt file and generates the list of string as output.
+     *
+     * @param filePath location of the file.
+     * @return all the strings passed in the file
+     * @throws FileNotFoundException if file path is invalid
+     */
     public static List<String> parseFile(String filePath) throws FileNotFoundException {
         return parseFile(filePath, ApplicationConstants.TXT_EXTENSION);
     }

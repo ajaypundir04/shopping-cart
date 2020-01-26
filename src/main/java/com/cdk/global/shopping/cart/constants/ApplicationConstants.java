@@ -8,6 +8,7 @@ public class ApplicationConstants {
 
     public static final String TXT_EXTENSION = "txt";
 
-    private ApplicationConstants(){}
+    private ApplicationConstants() {
+    }
 
 }

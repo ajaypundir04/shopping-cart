@@ -1,12 +1,16 @@
 package com.cdk.global.shopping.cart.service.impl;
 
-import com.cdk.global.shopping.cart.service.DiscountService;
 import com.cdk.global.shopping.cart.model.Customer;
 import com.cdk.global.shopping.cart.model.DiscountSlab;
+import com.cdk.global.shopping.cart.service.DiscountService;
 import com.cdk.global.shopping.cart.service.SlabManager;
 
 import java.util.List;
 
+/**
+ * @author Ajay Singh Pundir
+ * It will be used to handle all the discount calculations
+ */
 public class DiscountServiceImpl implements DiscountService {
     private SlabManager slabManager;
 
@@ -14,11 +18,16 @@ public class DiscountServiceImpl implements DiscountService {
         this.slabManager = slabManager;
     }
 
-
+    /**
+     * It will calculate the bill amount on the basis of customer type and purcahsed amount.
+     *
+     * @param purchaseAmount amount of purchase done by customer
+     * @param customerType   @{@link Customer} type of customer
+     * @return billAmount
+     */
     @Override
     public double calculateBillAmount(double purchaseAmount, Customer customerType) {
         List<DiscountSlab> slabs = slabManager.getSlab(customerType);
-
         return calculateDiscount(purchaseAmount, slabs);
     }
 

@@ -7,7 +7,7 @@
 4. `com.cdk.global.shopping.cart.model.Customer` is used to handle customer type 
 5. Input Format 
          slab  `premium 0 4000 10`
-         invoice `premium 1000`
+         invoice `premium 1000`         
          
     
 ### Test
