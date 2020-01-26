@@ -22,5 +22,5 @@
 
 ### Start Application
 1. ApplicationLaucher is the main entry for application.
-2. we can execute the command `art <slab_details_file_path> <invoice_details_file_path>` to run the application.
+2. we can execute the command `bin/shopping_cart <slab_details_file_path> <invoice_details_file_path>` to run the application.
 3. `bin/setup` for build and test the application.
