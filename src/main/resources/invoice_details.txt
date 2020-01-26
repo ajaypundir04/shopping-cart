@@ -1,1 +1,7 @@
 regular 5000
+regular 10000
+regular 15000
+premium 4000
+premium 8000
+premium 12000
+premium 20000

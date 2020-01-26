@@ -1,7 +1,6 @@
 package com.cdk.global.shopping.cart.util;
 
 
-
 import com.cdk.global.shopping.cart.constants.ApplicationConstants;
 import com.cdk.global.shopping.cart.exception.ShoppingCartException;
 
@@ -40,6 +39,10 @@ public class InputFileReader {
                 throw new ShoppingCartException("Wrong Extension");
         }
         return stringList;
+    }
+
+    public static List<String> parseFile(String filePath) throws FileNotFoundException {
+        return parseFile(filePath, ApplicationConstants.TXT_EXTENSION);
     }
 
     private static List<String> readTextFile(String filePath) throws FileNotFoundException {

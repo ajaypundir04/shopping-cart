@@ -9,4 +9,8 @@ public class ShoppingCartException extends RuntimeException {
     public ShoppingCartException(String message) {
         super(message);
     }
+
+    public ShoppingCartException(Throwable cause) {
+        super(cause);
+    }
 }

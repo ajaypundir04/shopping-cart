@@ -1,9 +1,11 @@
 package com.cdk.global.shopping.cart;
 
-import com.cdk.global.shopping.cart.constants.ApplicationConstants;
+import com.cdk.global.shopping.cart.exception.ShoppingCartException;
 import com.cdk.global.shopping.cart.model.Customer;
 import com.cdk.global.shopping.cart.model.DiscountSlab;
 import com.cdk.global.shopping.cart.model.Invoice;
+import com.cdk.global.shopping.cart.output.ConsoleLogger;
+import com.cdk.global.shopping.cart.output.Logger;
 import com.cdk.global.shopping.cart.parser.InputParser;
 import com.cdk.global.shopping.cart.parser.InputParserImpl;
 import com.cdk.global.shopping.cart.service.impl.DiscountServiceImpl;
@@ -14,32 +16,67 @@ import com.cdk.global.shopping.cart.util.InputFileReader;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * @author Ajay Singh Pundir
+ * This is the entry point of the application
+ */
 public class ApplicationLauncher {
 
-    private static ShoppingCart cart;
-     private static InputParser parser;
+    private ShoppingCart cart;
+    private InputParser parser;
+    private Logger logger;
+
     public static void main(String[] args) {
+        if (args == null || args.length < 2) {
+            System.err.println("File Paths not provided.");
+        } else {
+            new ApplicationLauncher().launchApplication(args[0], args[1]);
+        }
+    }
+
+    private void launchApplication(String slabDetailPath, String invoiceDetailPath) {
         try {
-            List<String> slabList = InputFileReader.parseFile("src/main/resources/slab_details.txt", ApplicationConstants.TXT_EXTENSION);
-            List<String> invoiceList = InputFileReader.parseFile("src/main/resources/invoice_details.txt", ApplicationConstants.TXT_EXTENSION);
-            parser = new InputParserImpl();
-            Map<Customer, List<DiscountSlab>> slabMap= parser.slabParser(slabList);
-            List<Invoice> invoices = parser.invoiceParser(invoiceList);
+            parser = loadParser();
+            logger = loadConsoleLogger();
+            Map<Customer, List<DiscountSlab>> slabMap = loadSlabs(slabDetailPath);
+            List<Invoice> invoices = loadInvoice(invoiceDetailPath);
+            if (Objects.nonNull(invoices)) {
+                logger.printHeader();
+            }
             invoices.stream()
                     .map(invoice -> {
                         cart = new ShoppingCart
                                 (invoice, new DiscountServiceImpl(new DiscountSlabManager(slabMap)));
-                        return  cart.getInvoice();
+                        return cart.getInvoice();
                     }).collect(Collectors.toList())
-            .stream().forEach(System.out::println);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+                    .stream().forEach(i -> logger.printInvoice(i));
+        } catch (Exception e) {
+            throw new ShoppingCartException(e);
         }
     }
 
+    private InputParser loadParser() {
+        return new InputParserImpl();
+    }
 
+    private Logger loadConsoleLogger() {
+        return new ConsoleLogger();
+    }
+
+    private Map<Customer, List<DiscountSlab>> loadSlabs(String filePath) throws FileNotFoundException {
+        List<String> slabList = InputFileReader.parseFile(filePath);
+        return parser.slabParser(slabList);
+
+    }
+
+    private List<Invoice> loadInvoice(String filePath) throws FileNotFoundException {
+        List<String> invoiceList = InputFileReader.parseFile(filePath);
+        return parser.invoiceParser(invoiceList);
+
+    }
 
 }
+

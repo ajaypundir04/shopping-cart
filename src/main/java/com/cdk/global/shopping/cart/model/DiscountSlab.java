@@ -57,4 +57,9 @@ public class DiscountSlab implements Comparable<DiscountSlab>{
     public int hashCode() {
         return Objects.hash(getLow(), getHigh(), getDiscount());
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

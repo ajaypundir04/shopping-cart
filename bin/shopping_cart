@@ -1,0 +1,8 @@
+#!/bin/bash
+if [ "$1" == "" ] || [ "$2" == "" ];
+then
+    echo "Missing input file parameter for slab details and invoice details"
+    echo "correct usage: shopping_cart <slab_details_file_path> <invoice_details_file_path>"
+else
+    ./gradlew run --args="$1 $2"
+fi
