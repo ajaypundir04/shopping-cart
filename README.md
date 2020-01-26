@@ -5,9 +5,8 @@
 2. We will keep the discount slabs on the basis of customer type.
 3. purchased amount and customer will be provided each time to calculate the billAmount.
 4. `com.cdk.global.shopping.cart.model.Customer` is used to handle customer type 
-5. Input Format 
-         slab  `premium 0 4000 10`
-         invoice `premium 1000`         
+5. Input Format slab  `premium 0 4000 10`
+6. Input Format invoice `premium 1000`         
          
     
 ### Test
