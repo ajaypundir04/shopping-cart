@@ -41,8 +41,8 @@ public class ApplicationLauncher {
         try {
             parser = loadParser();
             logger = loadConsoleLogger();
-            Map<Customer, List<DiscountSlab>> slabMap = loadSlabs(slabDetailPath);
-            List<Invoice> invoices = loadInvoice(invoiceDetailPath);
+            Map<Customer, List<DiscountSlab>> slabMap = parseSlabs(slabDetailPath);
+            List<Invoice> invoices = parseInvoice(invoiceDetailPath);
             if (Objects.nonNull(invoices)) {
                 logger.printHeader();
             }
@@ -66,13 +66,13 @@ public class ApplicationLauncher {
         return new ConsoleLogger();
     }
 
-    private Map<Customer, List<DiscountSlab>> loadSlabs(String filePath) throws FileNotFoundException {
+    private Map<Customer, List<DiscountSlab>> parseSlabs(String filePath) throws FileNotFoundException {
         List<String> slabList = InputFileReader.parseFile(filePath);
         return parser.slabParser(slabList);
 
     }
 
-    private List<Invoice> loadInvoice(String filePath) throws FileNotFoundException {
+    private List<Invoice> parseInvoice(String filePath) throws FileNotFoundException {
         List<String> invoiceList = InputFileReader.parseFile(filePath);
         return parser.invoiceParser(invoiceList);
 

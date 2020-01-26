@@ -58,11 +58,17 @@ public class DiscountSlabManager implements SlabManager {
      */
     @Override
     public void updateSlab(Customer customer, DiscountSlab oldSlab, DiscountSlab newSlab) {
+
+        //checking for customer existence
         if (!slabMap.containsKey(customer)) {
             throw new SlabManagerException("Customer Not Exists");
         }
+
+        //Get the slabs for the customer
         List<DiscountSlab> slabs = slabMap.get(customer);
+
         if (Objects.isNull(slabs)) {
+            // if no slabs are present then create a new one
             slabs = new ArrayList<>();
             slabs.add(newSlab);
         } else {
@@ -73,6 +79,7 @@ public class DiscountSlabManager implements SlabManager {
             if (!existingSlab.isPresent()) {
                 throw new SlabManagerException("No Such Slab");
             } else {
+                // update the existing slab with new discount limits
                 DiscountSlab discountSlab = existingSlab.get();
                 discountSlab.setLow(newSlab.getLow());
                 discountSlab.setDiscount(newSlab.getDiscount());
